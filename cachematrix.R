@@ -9,13 +9,16 @@
 
 makeCacheMatrix <- function(x = matrix()) {
 	m <- NULL
+
 	set <- function(y) {
-		x <<- y 						# Setting the matrix
+		x <<- y 				# Setting the matrix
 		m <<- NULL
 	}
+
 	get <- function() x 				# Can be used for confirmation
-	setinv <- function(val) m <<- val 	# Computing the inversion
+	setinv <- function(val) m <<- val 		# Computing the inversion
 	getinv <- function() m 				# Retrieving the result of computation
+
 	list(set = set, get = get,
 		 setinv = setinv,
 		 getinv = getinv)
@@ -28,10 +31,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
 	m <- x$getinv()
-	if(!is.null(m)) {					# If the computation has already taken place, return data stored in cache
+
+	if(!is.null(m)) {				# If the computation has already taken 
+							# place, return data stored in cache
+
 		message("Getting cached inverse matrix...")
 		return(m)
 	}
+
 	message("Computing matrix inversion...")
 	data <- x$get()
 	m <- solve(data, ...)
